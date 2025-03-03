@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import logo from "./logo.png"; // Add a logo image in the public folder or import it from assets
+import logo from './logo.svg';
+ // Add a logo image in the public folder or import it from assets
 
 // Mock authentication function
 const fakeAuth = {
