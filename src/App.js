@@ -1,3 +1,4 @@
+HEAD
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -95,13 +96,33 @@ const App = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   fakeAuth.users = JSON.parse(localStorage.getItem("users")) || {};
 
+import React, { useState } from 'react';
+import { FaUserCircle, FaBoxOpen, FaCog } from 'react-icons/fa';
+
+const App = () => {
+  // Example state for user profile and listings
+  const [profile, setProfile] = useState({
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    imageUrl: 'https://www.gravatar.com/avatar/00000000000000000000000000000000',
+  });
+
+  const [listings, setListings] = useState([
+    { id: 1, title: 'Item 1', description: 'Description of item 1' },
+    { id: 2, title: 'Item 2', description: 'Description of item 2' },
+    { id: 3, title: 'Item 3', description: 'Description of item 3' },
+    { id: 4, title: 'Item 4', description: 'Description of item 4' },
+  ]);
+55e9f31 (Updated user dashboard with new changes)
+
   return (
-    <Router>
-      <nav className="p-4 bg-blue-600 text-white flex justify-between shadow-lg">
-        <Link to="/" className="text-lg font-bold">Donation Platform</Link>
-        <div>
-          {user ? <Link to="/dashboard" className="mr-4">Dashboard</Link> : <Link to="/login">Login</Link>}
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className="w-64 h-full bg-gradient-to-b from-indigo-600 to-indigo-800 text-white p-6 shadow-lg">
+        <div className="flex items-center justify-center mb-6">
+          <FaUserCircle className="text-6xl" />
         </div>
+HEAD
       </nav>
       <Routes>
         <Route path="/login" element={<AuthPage isLogin={true} setUser={setUser} />} />
@@ -110,7 +131,77 @@ const App = () => {
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>
+
+        <ul className="space-y-4">
+          <li>
+            <a href="#profile" className="text-lg font-medium hover:text-indigo-300 transition-all">
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="#listings" className="text-lg font-medium hover:text-indigo-300 transition-all">
+              My Listings
+            </a>
+          </li>
+          <li>
+            <a href="#orders" className="text-lg font-medium hover:text-indigo-300 transition-all">
+              Orders
+            </a>
+          </li>
+          <li>
+            <a href="#settings" className="text-lg font-medium hover:text-indigo-300 transition-all">
+              Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 p-8 overflow-auto">
+        <h1 className="text-4xl font-extrabold text-gray-800 mb-8">User Profile Dashboard</h1>
+
+        {/* Profile Section */}
+        <div id="profile" className="bg-white p-8 rounded-2xl shadow-lg mb-10">
+          <h2 className="text-3xl font-semibold text-gray-700 mb-6">Profile</h2>
+          <div className="flex items-center mb-4">
+            <img
+              src={profile.imageUrl}
+              alt="Profile"
+              className="w-24 h-24 rounded-full border-4 border-indigo-600 mr-6"
+            />
+            <div>
+              <h3 className="text-2xl font-medium text-gray-800">{profile.name}</h3>
+              <p className="text-lg text-gray-600">{profile.email}</p>
+            </div>
+          </div>
+          <button className="mt-4 py-3 px-6 bg-indigo-600 text-white rounded-full text-lg font-semibold hover:bg-indigo-700 focus:outline-none transition-all">
+            Edit Profile
+          </button>
+        </div>
+
+        {/* My Listings Section */}
+        <div id="listings" className="bg-white p-8 rounded-2xl shadow-lg mb-10">
+          <h2 className="text-3xl font-semibold text-gray-700 mb-6">My Listings</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {listings.map((listing) => (
+              <div
+                key={listing.id}
+                className="bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+              >
+                <FaBoxOpen className="text-5xl text-indigo-600 mb-4" />
+                <h3 className="text-xl font-medium text-gray-800 mb-2">{listing.title}</h3>
+                <p className="text-lg text-gray-600 mb-4">{listing.description}</p>
+                <button className="py-2 px-5 bg-green-600 text-white rounded-full text-lg font-semibold hover:bg-green-700 focus:outline-none transition-all">
+                  Edit Listing
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+ 55e9f31 (Updated user dashboard with new changes)
   );
-};
+}
 
 export default App;
